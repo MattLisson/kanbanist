@@ -58,7 +58,9 @@ class ListItem extends React.Component {
         return markdown
             .toHTML(todoistToMd)
             .replace(/<\/?p>/g, '')
-            .replace(/a href/g, 'a target="_blank" href');
+            .replace(/a href/g, 'a target="_blank" href')
+            .replace(/<h(\d)>/g, (_, num) => '#'.repeat(num))
+            .replace(/<\/h\d>/g, '');
     };
 
     formatOutlookLink = text => {
@@ -210,7 +212,7 @@ class ListItem extends React.Component {
                             className="task-link sr-only sr-only-focusable"
                             href={`https://todoist.com/showTask?id=${item.id}`}
                             target="_blank"
-                            rel="noopener"
+                            rel="noopener noreferrer"
                             aria-label="Open in Todoist">
                             <Icon iconName="link" iconSize={5} />
                         </a>
